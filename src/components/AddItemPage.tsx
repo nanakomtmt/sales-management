@@ -20,8 +20,6 @@ export const AddItemPage: FC = () => {
 
   const onClickAddItem = (item: Item) => {
     addItem(item);
-
-    console.log("additem");
     setItem(null);
     setIsAlertOpen(true);
     setTimeout(() => setIsAlertOpen(false), 2000);
