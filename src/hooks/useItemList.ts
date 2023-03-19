@@ -15,7 +15,9 @@ import "firebase/storage";
 import { useFirebase } from "./useFirebase";
 import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { ItemDataContext } from "../providers/ItemDataContext";
+
 export const useItemList = () => {
+  const { addFirebase } = useFirebase();
   const { items, setItems } = useContext(ItemDataContext);
   const { getItemData } = useFirebase();
   const addItem = (item: Item) => {
@@ -24,6 +26,7 @@ export const useItemList = () => {
     newItems.push(item);
     setItems(newItems);
     console.log(items);
+    addFirebase(item);
   };
   const deleteItem = (index: number) => {
     var result: boolean = window.confirm("本当に削除しますか？");
@@ -44,6 +47,7 @@ export const useItemList = () => {
         cost: doc.data().cost,
         price: doc.data().price,
         postage: doc.data().postage,
+        unitSales: doc.data().unitSales,
       };
       console.log("aaaaaaaaaaaaa");
       console.log(item);

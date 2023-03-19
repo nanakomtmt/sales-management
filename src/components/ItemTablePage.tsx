@@ -18,7 +18,18 @@ export const ItemTablePage: FC = () => {
   const onClickDelete = useCallback(
     (index: number) => {
       deleteItem(index);
-      console.log("aaa");
+    },
+    [deleteItem]
+  );
+  const onClickPlus = useCallback(
+    (index: number) => {
+      // deleteItem(index);
+    },
+    [deleteItem]
+  );
+  const onClickMinus = useCallback(
+    (index: number) => {
+      // deleteItem(index);
     },
     [deleteItem]
   );
@@ -26,7 +37,12 @@ export const ItemTablePage: FC = () => {
   return (
     <div>
       <Stack alignContent="center" alignItems="start">
-        <ItemList items={items} onClickDelete={onClickDelete}></ItemList>
+        <ItemList
+          items={items}
+          onClickDelete={onClickDelete}
+          onClickMinus={onClickMinus}
+          onClickPlus={onClickPlus}
+        ></ItemList>
       </Stack>
     </div>
   );
