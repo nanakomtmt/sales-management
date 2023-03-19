@@ -17,6 +17,7 @@ import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { ItemDataContext } from "../providers/ItemDataContext";
 export const useItemList = () => {
   const { items, setItems } = useContext(ItemDataContext);
+  const { getItemData } = useFirebase();
   const addItem = (item: Item) => {
     const newItems = [...(items ?? [])];
 
@@ -33,18 +34,23 @@ export const useItemList = () => {
       setItems(newItems);
     }
   };
-  const fetchItems = useCallback(async () => {
-    // const { getItemData } = useFirebase();
-    // var databaseItems: QuerySnapshot<DocumentData> = await getItemData();
-    // return databaseItems;
-  }, [items]);
-  // const setFirebase = useCallback(async () => {
-  //   const db = getFirestore(firebaseApp);
-  //   // const q = query(collection(db, "videos"));
-  //   const ref = doc(db, "videos", params.id.toString());
-  //   await updateDoc(ref, {
-  //     checkStatus: params.value,
-  //   });
-  // }, []);
+  const fetchItems = async () => {
+    var databaseItems: QuerySnapshot<DocumentData> = await getItemData();
+    const newItems: Item[] = [];
+
+    databaseItems.forEach((doc) => {
+      var item: Item = {
+        name: doc.data().name,
+        cost: doc.data().cost,
+        price: doc.data().price,
+        postage: doc.data().postage,
+      };
+      console.log("aaaaaaaaaaaaa");
+      console.log(item);
+      newItems.push(item);
+    });
+    setItems(newItems);
+  };
+
   return { items, addItem, deleteItem, fetchItems };
 };

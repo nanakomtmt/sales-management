@@ -45,10 +45,12 @@ export const ItemList: FC<Props> = (props) => {
                   </TableCell>
                   <TableCell align="center">{item.cost}</TableCell>
                   <TableCell align="center">{item.price}</TableCell>
-                  <TableCell align="center">{item.price * 0.1}</TableCell>
+                  <TableCell align="center">
+                    {Math.floor(item.price * 0.1)}
+                  </TableCell>
                   <TableCell align="center">{item.postage}</TableCell>
                   <TableCell align="center">
-                    {item.cost - item.price * 1.1 - item.postage}
+                    {Math.floor(item.cost - item.price * 1.1 - item.postage)}
                   </TableCell>
                   <TableCell align="center">
                     <Button

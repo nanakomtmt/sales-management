@@ -13,8 +13,7 @@ import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { async } from "@firebase/util";
 
 export const ItemTablePage: FC = () => {
-  const { items, deleteItem, fetchItems } = useItemList();
-  // const databaseItems: Promise<QuerySnapshot<DocumentData>> = fetchItems();
+  const { items, deleteItem } = useItemList();
 
   const onClickDelete = useCallback(
     (index: number) => {

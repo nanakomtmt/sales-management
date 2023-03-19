@@ -13,7 +13,7 @@ import { useFirebase } from "../hooks/useFirebase";
 import ReactDOM from "react-dom";
 
 export const AddItemPage: FC = () => {
-  const { addItem, items } = useItemList();
+  const { addItem } = useItemList();
   const { addFirebase } = useFirebase();
 
   const [item, setItem] = useState<Item | null>(null);

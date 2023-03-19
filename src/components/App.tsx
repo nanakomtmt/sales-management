@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { ChangeEvent, useState, FC } from "react";
 import styled from "styled-components";
 import { ItemList } from "./ItemList";
@@ -10,12 +10,21 @@ import { DrawerItem } from "./DrawerItem";
 import { AddItemPage } from "./AddItemPage";
 import { ItemTablePage } from "./ItemTablePage";
 import type { Page } from "../types/Page";
+import { useFirebase } from "../hooks/useFirebase";
 
 export const App: FC = () => {
   const [page, setPage] = useState<Page>("List");
-  const onClickItem = useCallback((page: Page) => {
-    setPage(page);
+  const { items, fetchItems } = useItemList();
+  const onClickItem = useCallback(
+    (page: Page) => {
+      setPage(page);
+    },
+    [items]
+  );
+  useEffect(() => {
+    fetchItems();
   }, []);
+
   return (
     <Container>
       <Stack
