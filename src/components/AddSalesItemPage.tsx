@@ -11,9 +11,10 @@ import AddItemField from "./AddItemField";
 import { ItemTablePage } from "./ItemTablePage";
 import { useFirebase } from "../hooks/useFirebase";
 import ReactDOM from "react-dom";
+import { AddSalesField } from "./AddSalesField";
 
-export const AddItemPage: FC = () => {
-  const { addItem } = useItemList();
+export const AddSalesItemPage: FC = () => {
+  const { addItem, items } = useItemList();
 
   const [item, setItem] = useState<Item | null>(null);
   const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
@@ -30,8 +31,8 @@ export const AddItemPage: FC = () => {
   return (
     <div>
       <Stack alignContent="center" alignItems="start">
-        <h1>商品登録</h1>
-        <AddItemField AddItem={onClickAddItem}></AddItemField>
+        <h1>売上の追加</h1>
+        <AddSalesField AddItem={onClickAddItem} items={items}></AddSalesField>
         {isAlertOpen && (
           <Alert severity="success">一覧ページに商品を追加しました</Alert>
         )}

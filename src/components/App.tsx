@@ -11,6 +11,7 @@ import { AddItemPage } from "./AddItemPage";
 import { ItemTablePage } from "./ItemTablePage";
 import type { Page } from "../types/Page";
 import { useFirebase } from "../hooks/useFirebase";
+import { AddSalesItemPage } from "./AddSalesItemPage";
 
 export const App: FC = () => {
   const [page, setPage] = useState<Page>("List");
@@ -29,7 +30,7 @@ export const App: FC = () => {
     <Container>
       <Stack
         direction="row"
-        spacing={30}
+        spacing={10}
         alignContent="center"
         alignItems="center"
       >
@@ -37,7 +38,7 @@ export const App: FC = () => {
         <Stack alignContent="center" alignItems="start">
           <div> {page === "List" ? <ItemTablePage /> : null}</div>
           <div> {page === "Add" ? <AddItemPage /> : null}</div>
-          <div> {page === "Profit" ? <AddItemPage /> : null}</div>
+          <div> {page === "Profit" ? <AddSalesItemPage /> : null}</div>
         </Stack>
       </Stack>
     </Container>

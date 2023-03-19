@@ -54,7 +54,7 @@ export const ItemList: FC<Props> = (props) => {
                   </TableCell>
                   <TableCell align="center">{item.postage}</TableCell>
                   <TableCell align="center">
-                    {Math.floor(item.price * 0.9 - item.cost - item.postage)}
+                    {Math.floor(item.cost - item.price * 1.1 - item.postage)}
                   </TableCell>
                   <TableCell align="center">
                     <Button onClick={() => onClickMinus(index)} color="primary">
