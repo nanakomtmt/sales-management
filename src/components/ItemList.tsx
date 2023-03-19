@@ -11,26 +11,27 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 type Props = {
-  items: Item[];
+  items?: Item[];
   onClickDelete: (index: number) => void;
 };
 export const ItemList: FC<Props> = (props) => {
-  const { items, onClickDelete } = props;
+  const { items = [], onClickDelete } = props;
   console.log(`items${items}`);
   return (
     <Container>
-      <p>商品一覧</p>
+      <h1>商品一覧</h1>
       <ul>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>商品名</TableCell>
-                <TableCell align="right">仕入れ値</TableCell>
-                <TableCell align="right">売値</TableCell>
-                <TableCell align="right">手数料</TableCell>
-                <TableCell align="right">送料</TableCell>
-                <TableCell align="right">利益</TableCell>
+                <TableCell align="left">仕入れ値(円)</TableCell>
+                <TableCell align="left">売値(円)</TableCell>
+                <TableCell align="left">手数料(円)</TableCell>
+                <TableCell align="left">送料(円)</TableCell>
+                <TableCell align="left">利益 / 個</TableCell>
+                <TableCell align="center">削除</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -42,12 +43,20 @@ export const ItemList: FC<Props> = (props) => {
                   <TableCell component="th" scope="row">
                     {item.name}
                   </TableCell>
-                  <TableCell align="right">{item.cost}</TableCell>
-                  <TableCell align="right">{item.price}</TableCell>
-                  <TableCell align="right">{item.commission}</TableCell>
-                  <TableCell align="right">{item.postage}</TableCell>
-                  <TableCell align="right">
-                    {item.cost - item.price - item.commission - item.postage}
+                  <TableCell align="center">{item.cost}</TableCell>
+                  <TableCell align="center">{item.price}</TableCell>
+                  <TableCell align="center">{item.price * 0.1}</TableCell>
+                  <TableCell align="center">{item.postage}</TableCell>
+                  <TableCell align="center">
+                    {item.cost - item.price * 1.1 - item.postage}
+                  </TableCell>
+                  <TableCell align="center">
+                    <Button
+                      onClick={() => onClickDelete(index)}
+                      color="primary"
+                    >
+                      削除
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

@@ -3,38 +3,41 @@ import { ChangeEvent, useState, FC } from "react";
 import styled from "styled-components";
 import { ItemList } from "./ItemList";
 import { useItemList } from "../hooks/useItemList";
-import { Stack } from "@mui/material";
+import { Alert, Stack } from "@mui/material";
 import MUIcon from "@mui/icons-material";
 import type { Item } from "../types/item";
 import { DrawerItem } from "./DrawerItem";
-import { AddItemField } from "./AddItemField";
+import AddItemField from "./AddItemField";
 import { ItemTablePage } from "./ItemTablePage";
+import { useFirebase } from "../hooks/useFirebase";
+import ReactDOM from "react-dom";
 
 export const AddItemPage: FC = () => {
-  const { addItem, items, deleteItem } = useItemList();
+  const { addItem, items } = useItemList();
+  const { addFirebase } = useFirebase();
+
   const [item, setItem] = useState<Item | null>(null);
+  const [isAlertOpen, setIsAlertOpen] = useState<boolean>(false);
 
   const onClickAddItem = (item: Item) => {
     addItem(item);
+    addFirebase(item);
     console.log("additem");
     setItem(null);
+    setIsAlertOpen(true);
+    setTimeout(() => setIsAlertOpen(false), 2000);
   };
-  const onClickDelete = useCallback(
-    (index: number) => {
-      deleteItem(index);
-      console.log("aaa");
-    },
-    [deleteItem]
-  );
 
   return (
     <div>
       <Stack alignContent="center" alignItems="start">
         <h1>商品の追加</h1>
         <AddItemField AddItem={onClickAddItem}></AddItemField>
-        {/* <ItemTablePage></ItemTablePage> */}
-        <ItemList items={items} onClickDelete={onClickDelete}></ItemList>
+        {isAlertOpen && (
+          <Alert severity="success">一覧ページに商品を追加しました</Alert>
+        )}
 
+        {/* <ItemTablePage></ItemTablePage> */}
         {/* <input type="text" value={item?.name} onChange={onChangeText}></input>
 <Button onClick={onClickAdd}>追加</Button> */}
       </Stack>

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { ChangeEvent, useState, FC } from "react";
 import styled from "styled-components";
 import { ItemList } from "./ItemList";
@@ -19,10 +19,22 @@ import {
 } from "@mui/material";
 import MUIcon from "@mui/icons-material";
 import type { Item } from "../types/item";
-import { AddItemField } from "./AddItemField";
-import { DrawerTabItem } from "./DrawertabItem";
 
-export const DrawerItem: FC = () => {
+import { DrawerTabItem } from "./DrawertabItem";
+import type { Page } from "../types/Page";
+import { PageContext } from "../providers/PageContext";
+
+type Props = {
+  onClickItem: (index: Page) => void;
+};
+
+export const DrawerItem: FC<Props> = (props) => {
+  const { onClickItem } = props;
+  const { setPage } = useContext(PageContext);
+  const onClick = (page: Page) => {
+    onClickItem(page);
+    setPage(page);
+  };
   return (
     <div>
       <Drawer
@@ -34,8 +46,21 @@ export const DrawerItem: FC = () => {
       >
         <Divider />
         <List>
-          <DrawerTabItem label="追加"></DrawerTabItem>
-          <DrawerTabItem label="一覧"></DrawerTabItem>
+          <DrawerTabItem
+            label="追加"
+            onClickItem={() => onClick("Add")}
+            page="Add"
+          ></DrawerTabItem>
+          <DrawerTabItem
+            label="一覧"
+            onClickItem={() => onClick("List")}
+            page="List"
+          ></DrawerTabItem>
+          <DrawerTabItem
+            label="売上登録"
+            onClickItem={() => onClick("Profit")}
+            page="Profit"
+          ></DrawerTabItem>
         </List>
         {/* <Divider /> */}
       </Drawer>

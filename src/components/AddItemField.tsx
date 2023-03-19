@@ -1,4 +1,5 @@
-import { FC, useState, ChangeEvent } from "react";
+import { FC, useState, ChangeEvent, useMemo } from "react";
+import React from "react";
 import styled from "styled-components";
 import {
   Button,
@@ -14,20 +15,20 @@ type Props = {
   AddItem: Function;
 };
 
-export const AddItemField: FC<Props> = (props) => {
+const AddItemField: FC<Props> = React.memo((props: Props) => {
   const { AddItem } = props;
 
   const [name, setName] = useState<string>("");
   const [cost, setCost] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
-  const [commission, setCommission] = useState<number>(0);
+
   const [postage, setPostage] = useState<number>(0);
+
   const onClickAddButton = () => {
     AddItem({
       name: name,
       cost: cost,
       price: price,
-      commission: commission,
       postage: postage,
     });
   };
@@ -39,9 +40,6 @@ export const AddItemField: FC<Props> = (props) => {
   };
   const onChangePrice = (value: number) => {
     setPrice(value);
-  };
-  const onChangeCommission = (value: number) => {
-    setCommission(value);
   };
 
   const onChangePostage = (value: number) => {
@@ -67,11 +65,6 @@ export const AddItemField: FC<Props> = (props) => {
             label="売値"
             unit="円"
             callback={onChangePrice}
-          ></TextInputField>
-          <TextInputField
-            label="手数料"
-            unit="円"
-            callback={onChangeCommission}
           ></TextInputField>
           <TextInputField
             label="送料"
@@ -102,4 +95,5 @@ export const AddItemField: FC<Props> = (props) => {
       </Stack>
     </Container>
   );
-};
+});
+export default AddItemField;
