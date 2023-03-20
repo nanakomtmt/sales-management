@@ -23,13 +23,25 @@ const AddItemField: FC<Props> = React.memo((props: Props) => {
   const [price, setPrice] = useState<number>(0);
 
   const [postage, setPostage] = useState<number>(0);
+  const getRandomString = (length: number): string => {
+    let chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let rand_str = "";
+    for (var i = 0; i < length; i++) {
+      rand_str += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    return rand_str;
+  };
 
   const onClickAddButton = () => {
     AddItem({
+      id: getRandomString(20),
       name: name,
       cost: cost,
       price: price,
       postage: postage,
+      unitSales: 0,
     });
   };
   const onChangeName = (value: string) => {

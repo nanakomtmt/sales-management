@@ -32,9 +32,10 @@ export const ItemList: FC<Props> = (props) => {
                 <TableCell align="left">手数料(円)</TableCell>
                 <TableCell align="left">送料(円)</TableCell>
                 <TableCell align="left">利益 / 個</TableCell>
-                <TableCell align="center">-</TableCell>
+                {/* <TableCell align="center">-</TableCell> */}
                 <TableCell align="center">売上個数</TableCell>
                 <TableCell align="center">+</TableCell>
+                <TableCell align="center">総利益(円)</TableCell>
                 <TableCell align="center">削除</TableCell>
               </TableRow>
             </TableHead>
@@ -56,28 +57,34 @@ export const ItemList: FC<Props> = (props) => {
                   <TableCell align="center">
                     {Math.floor(item.price * 0.9 - item.cost - item.postage)}
                   </TableCell>
-                  <TableCell align="center">
-                    <Button onClick={() => onClickMinus(index)} color="primary">
-                      -
-                    </Button>
-                  </TableCell>
+                  {/* <TableCell align="center"></TableCell> */}
                   <TableCell align="center">{item.unitSales}</TableCell>
                   <TableCell align="center">
-                    <Button
-                      onClick={() => {
-                        onClickPlus(index);
-                        item.unitSales--;
-                      }}
-                      color="primary"
-                    >
-                      +
-                    </Button>
+                    <Stack>
+                      <Button
+                        onClick={() => onClickPlus(index)}
+                        color="primary"
+                        size="small"
+                      >
+                        +
+                      </Button>
+                      <Button
+                        onClick={() => onClickMinus(index)}
+                        color="primary"
+                        size="small"
+                      >
+                        -
+                      </Button>
+                    </Stack>
+                  </TableCell>
+                  <TableCell align="center">
+                    {item.unitSales *
+                      Math.floor(item.price * 0.9 - item.cost - item.postage)}
                   </TableCell>
                   <TableCell align="center">
                     <Button
                       onClick={() => {
                         onClickDelete(index);
-                        item.unitSales++;
                       }}
                       color="primary"
                     >

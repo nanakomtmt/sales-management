@@ -13,7 +13,7 @@ import { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { async } from "@firebase/util";
 
 export const ItemTablePage: FC = () => {
-  const { items, deleteItem } = useItemList();
+  const { items, deleteItem, plusSales, minusSales } = useItemList();
 
   const onClickDelete = useCallback(
     (index: number) => {
@@ -23,15 +23,15 @@ export const ItemTablePage: FC = () => {
   );
   const onClickPlus = useCallback(
     (index: number) => {
-      // deleteItem(index);
+      plusSales(index);
     },
-    [deleteItem]
+    [plusSales]
   );
   const onClickMinus = useCallback(
     (index: number) => {
-      // deleteItem(index);
+      minusSales(index);
     },
-    [deleteItem]
+    [minusSales]
   );
 
   return (

@@ -24,7 +24,7 @@ export const DrawerTabItem: FC<Props> = (props) => {
         style={{
           maxWidth: "200px",
           maxHeight: "50px",
-          minWidth: "200px",
+          minWidth: "100px",
           minHeight: "50px",
 
           backgroundColor: page == nowPage ? "#ffd740" : "white",

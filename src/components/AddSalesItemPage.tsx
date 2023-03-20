@@ -4,13 +4,13 @@ import styled from "styled-components";
 import { ItemList } from "./ItemList";
 import { useItemList } from "../hooks/useItemList";
 import { Alert, Stack } from "@mui/material";
-import MUIcon from "@mui/icons-material";
+
 import type { Item } from "../types/item";
 import { DrawerItem } from "./DrawerItem";
 import AddItemField from "./AddItemField";
 import { ItemTablePage } from "./ItemTablePage";
 import { useFirebase } from "../hooks/useFirebase";
-import ReactDOM from "react-dom";
+
 import { AddSalesField } from "./AddSalesField";
 
 export const AddSalesItemPage: FC = () => {

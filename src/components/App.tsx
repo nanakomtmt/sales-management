@@ -27,20 +27,29 @@ export const App: FC = () => {
   }, []);
 
   return (
-    <Container>
-      <Stack
-        direction="row"
-        spacing={10}
-        alignContent="center"
-        alignItems="center"
-      >
-        <DrawerItem onClickItem={onClickItem}></DrawerItem>
-        <Stack alignContent="center" alignItems="start">
-          <div> {page === "List" ? <ItemTablePage /> : null}</div>
-          <div> {page === "Add" ? <AddItemPage /> : null}</div>
-          <div> {page === "Profit" ? <AddSalesItemPage /> : null}</div>
+    <Flex>
+      <Container>
+        <Stack
+          direction="row"
+          spacing={5}
+          alignContent="center"
+          alignItems="center"
+        >
+          <DrawerItem onClickItem={onClickItem}></DrawerItem>
+          <Stack alignContent="center" alignItems="start">
+            <div> {page === "List" ? <ItemTablePage /> : null}</div>
+            <div> {page === "Add" ? <AddItemPage /> : null}</div>
+            <div> {page === "Profit" ? <AddSalesItemPage /> : null}</div>
+            {/* <div> {page === "BarGraph" ? <BarGraphPage /> : null}</div> */}
+          </Stack>
         </Stack>
-      </Stack>
-    </Container>
+      </Container>
+    </Flex>
   );
 };
+
+const Flex = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+`;

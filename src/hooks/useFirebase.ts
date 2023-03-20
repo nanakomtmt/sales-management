@@ -13,25 +13,37 @@ import {
   updateDoc,
   addDoc,
   getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import "firebase/storage";
 import { QuerySnapshot, DocumentData } from "firebase/firestore";
 export const useFirebase = () => {
+  const db = getFirestore(firebaseApp);
   const addFirebase = async (item: Item) => {
-    console.log(firebaseApp.name);
-    const db = getFirestore(firebaseApp);
-
     try {
-      const docRef = await addDoc(collection(db, "items"), item);
-      console.log(docRef);
+      const docRef = await setDoc(doc(db, "items", item.id), item);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+  const deleteFirebase = async (item: Item) => {
+    try {
+      const docRef = await deleteDoc(doc(db, "items", item.id));
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+  const updateFirebase = async (item: Item) => {
+    try {
+      const ref = doc(db, "items", item.id);
+
+      // Set the "capital" field of the city 'DC'
+      await updateDoc(ref, item);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   };
   const getItemData = async (): Promise<QuerySnapshot<DocumentData>> => {
-    console.log(firebaseApp.name);
-    const db = getFirestore(firebaseApp);
-
     const q = query(collection(db, "items"));
 
     const querySnapshot = await getDocs(q);
@@ -41,5 +53,5 @@ export const useFirebase = () => {
     });
     return querySnapshot;
   };
-  return { addFirebase, getItemData };
+  return { addFirebase, getItemData, updateFirebase, deleteFirebase };
 };

@@ -61,6 +61,11 @@ export const DrawerItem: FC<Props> = (props) => {
             onClickItem={() => onClick("Profit")}
             page="Profit"
           ></DrawerTabItem>
+          <DrawerTabItem
+            label="売上グラフ"
+            onClickItem={() => onClick("BarGraph")}
+            page="BarGraph"
+          ></DrawerTabItem>
         </List>
         {/* <Divider /> */}
       </Drawer>
