@@ -12,6 +12,7 @@ import { ItemTablePage } from "./ItemTablePage";
 import type { Page } from "../types/Page";
 import { useFirebase } from "../hooks/useFirebase";
 import { AddSalesItemPage } from "./AddSalesItemPage";
+import { BarGraph } from "./BarGraph";
 
 export const App: FC = () => {
   const [page, setPage] = useState<Page>("List");
@@ -27,24 +28,22 @@ export const App: FC = () => {
   }, []);
 
   return (
-    <Flex>
-      <Container>
-        <Stack
-          direction="row"
-          spacing={5}
-          alignContent="center"
-          alignItems="center"
-        >
-          <DrawerItem onClickItem={onClickItem}></DrawerItem>
-          <Stack alignContent="center" alignItems="start">
-            <div> {page === "List" ? <ItemTablePage /> : null}</div>
-            <div> {page === "Add" ? <AddItemPage /> : null}</div>
-            <div> {page === "Profit" ? <AddSalesItemPage /> : null}</div>
-            {/* <div> {page === "BarGraph" ? <BarGraphPage /> : null}</div> */}
-          </Stack>
+    <Container>
+      <Stack
+        direction="row"
+        spacing={5}
+        alignContent="center"
+        alignItems="center"
+      >
+        <DrawerItem onClickItem={onClickItem}></DrawerItem>
+        <Stack alignContent="center" alignItems="start">
+          <div> {page === "List" ? <ItemTablePage /> : null}</div>
+          <div> {page === "Add" ? <AddItemPage /> : null}</div>
+          <div> {page === "Profit" ? <AddSalesItemPage /> : null}</div>
+          <div> {page === "BarGraph" ? <BarGraph items={items} /> : null}</div>
         </Stack>
-      </Container>
-    </Flex>
+      </Stack>
+    </Container>
   );
 };
 
