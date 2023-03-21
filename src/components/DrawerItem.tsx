@@ -16,6 +16,8 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  AppBar,
+  Typography,
 } from "@mui/material";
 import MUIcon from "@mui/icons-material";
 import type { Item } from "../types/item";
@@ -37,15 +39,13 @@ export const DrawerItem: FC<Props> = (props) => {
   };
   return (
     <div>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: "200px" },
-        }}
-      >
-        <Divider />
-        <List>
+      <AppBar position="static" color="inherit">
+        <Stack direction={"row"} alignItems="center">
+          <Typography variant="h6" align="center">
+            こうへいくんの
+            <br />
+            販売日記
+          </Typography>
           <DrawerTabItem
             label="追加"
             onClickItem={() => onClick("Add")}
@@ -66,9 +66,19 @@ export const DrawerItem: FC<Props> = (props) => {
             onClickItem={() => onClick("BarGraph")}
             page="BarGraph"
           ></DrawerTabItem>
-        </List>
-        {/* <Divider /> */}
-      </Drawer>
+        </Stack>
+      </AppBar>
+      {/* <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", sm: "block" },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: "200px" },
+        }}
+      >
+        <Divider />
+
+        // {/* <Divider /> */}
+      {/* </Drawer> */}
     </div>
   );
 };

@@ -28,22 +28,17 @@ export const App: FC = () => {
   }, []);
 
   return (
-    <Container>
-      <Stack
-        direction="row"
-        spacing={5}
-        alignContent="center"
-        alignItems="center"
-      >
-        <DrawerItem onClickItem={onClickItem}></DrawerItem>
+    <Stack alignContent="left" alignItems="left">
+      <DrawerItem onClickItem={onClickItem}></DrawerItem>
+      <Container>
         <Stack alignContent="center" alignItems="start">
           <div> {page === "List" ? <ItemTablePage /> : null}</div>
           <div> {page === "Add" ? <AddItemPage /> : null}</div>
           <div> {page === "Profit" ? <AddSalesItemPage /> : null}</div>
           <div> {page === "BarGraph" ? <BarGraph items={items} /> : null}</div>
         </Stack>
-      </Stack>
-    </Container>
+      </Container>
+    </Stack>
   );
 };
 

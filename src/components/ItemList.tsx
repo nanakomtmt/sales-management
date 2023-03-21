@@ -1,5 +1,4 @@
 import { FC } from "react";
-import styled from "styled-components";
 import { Button, Container, TextField, Stack } from "@mui/material";
 import type { Item } from "../types/item";
 import Table from "@mui/material/Table";
@@ -9,6 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 type Props = {
   items?: Item[];
@@ -18,27 +18,39 @@ type Props = {
 };
 export const ItemList: FC<Props> = (props) => {
   const { items = [], onClickDelete, onClickMinus, onClickPlus } = props;
+  const columns: GridColDef[] = [
+    { field: "name", headerName: "商品名", width: 180 },
+    { field: "cost", headerName: "仕入れ値(円)", width: 100 },
+    { field: "price", headerName: "売値(円)", width: 100 },
+    { field: "commission", headerName: "手数料(円)", width: 100 },
+    { field: "postage", headerName: "送料(円)", width: 100 },
+    { field: "unitSales", headerName: "利益 / 個", width: 100 },
+    { field: "unit", headerName: "売上個数", width: 100 },
+    { field: "register", headerName: "登録", width: 100 },
+    { field: "profit", headerName: "総利益", width: 100 },
+    { field: "delete", headerName: "削除", width: 100 },
+  ];
+  const rows = [
+    { id: 1, name: "Snow", cost: "Jon", age: 35 },
+    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  ];
+
   return (
     <Container>
       <h1>商品一覧</h1>
       <ul>
         <TableContainer component={Paper}>
+          <DataGrid rows={rows} columns={columns} />
+
           <Table sx={{ minWidth: 1000 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>商品名</TableCell>
-                <TableCell align="left">仕入れ値(円)</TableCell>
-                <TableCell align="left">売値(円)</TableCell>
-                <TableCell align="left">手数料(円)</TableCell>
-                <TableCell align="left">送料(円)</TableCell>
-                <TableCell align="left">利益 / 個</TableCell>
-                {/* <TableCell align="center">-</TableCell> */}
-                <TableCell align="center">売上個数</TableCell>
-                <TableCell align="center">+</TableCell>
-                <TableCell align="center">総利益(円)</TableCell>
-                <TableCell align="center">削除</TableCell>
-              </TableRow>
-            </TableHead>
+            <TableHead></TableHead>
             <TableBody>
               {items.map((item, index) => (
                 <TableRow
